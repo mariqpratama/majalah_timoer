@@ -44,12 +44,3 @@ Route::middleware('admin.session')->group(function() {
     Route::post('/admin/carousel', [AdminController::class, 'storeCarousel']);
     Route::delete('/admin/carousel/{id}', [AdminController::class, 'destroyCarousel']);
 });
-// Route::middleware('admin.session')->group(function() {
-//     Route::get('/admin', [AdminController::class, 'dashboard']);
-//     Route::post('/admin/majalah', [AdminController::class, 'storeMajalah']);
-//     Route::get('/admin/majalah/{id}/edit', [AdminController::class, 'editMajalah']);
-//     Route::put('/admin/majalah/{id}', [AdminController::class, 'updateMajalah']);
-//     Route::delete('/admin/majalah/{id}', [AdminController::class, 'destroyMajalah']);
-//     Route::post('/admin/carousel', [AdminController::class, 'storeCarousel']);
-//     Route::delete('/admin/carousel/{id}', [AdminController::class, 'destroyCarousel']);
-// });

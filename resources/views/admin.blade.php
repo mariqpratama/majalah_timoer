@@ -2,7 +2,7 @@
     {{-- Navbar Admin --}}
     <nav class="bg-white border-b border-gray-200 px-4 py-3 flex justify-between items-center shadow-sm">
         <div class="flex items-center space-x-3">
-            <img src="/img/logo.png" class="h-10 w-auto object-contain" alt="Logo" />
+            <img src="/asset/logo/logo.png" class="h-10 w-auto object-contain" alt="Logo" />
             <span class="font-bold text-blue-700 text-lg">Admin Panel</span>
         </div>
         <div class="flex items-center space-x-4">

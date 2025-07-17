@@ -6,9 +6,10 @@
     <link rel="icon" href="/img/logo.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite('resources/css/app.css')
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('build/assets/app-CXUAFoOI.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-DHBATib1.css') }}">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <link href="{{ asset('style/css/style.css') }}" rel="stylesheet" type="text/css">
     <!-- Flipbook StyleSheet -->
@@ -51,6 +52,7 @@
     </footer>
 </body>
 
+<script src="{{ asset('build/assets/app-DYjYUjHp.js') }}" defer></script>
 <!-- JS DearFlip -->
 {{-- <script src="https://cdn.jsdelivr.net/npm/dflip@1.5.15/js/dflip.min.js"></script> --}}
 <script src="{{ asset('flipbook/flipbook.js') }}"></script>
