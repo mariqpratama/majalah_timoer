@@ -7,6 +7,7 @@ use App\Models\Majalah;
 use App\Models\Carousel;
 use App\Models\MajalahVisit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
@@ -19,6 +20,11 @@ class AdminController extends Controller
         $totalMajalahVisits = MajalahVisit::count();
         return view('admin', compact('visits', 'majalahs', 'carousels', 'totalMajalahVisits'));
     }
+
+    public function createMajalah()
+{
+    return view('admin.create');
+}
 
     public function storeMajalah(Request $request)
     {
@@ -45,13 +51,13 @@ class AdminController extends Controller
     }
 
 
-    public function editMajalah($id)
-    {
-        $majalah = Majalah::findOrFail($id);
-        return response()->json($majalah);
-    }
+public function editMajalah($id)
+{
+    $majalah = Majalah::findOrFail($id);
+    return view('/admin.edit', compact('majalah'));
+}
 
-    public function updateMajalah(Request $request, $id)
+public function updateMajalah(Request $request, $id)
 {
     $majalah = Majalah::findOrFail($id);
 
@@ -62,32 +68,31 @@ class AdminController extends Controller
         'file_pdf' => 'nullable|mimes:pdf',
     ]);
 
-    // Hapus file cover lama jika ada dan upload file cover baru
+    // Ganti Cover jika ada
     if ($request->hasFile('cover')) {
-        if ($majalah->cover && Storage::disk('public')->exists("asset/majalah/cover/{$majalah->cover}")) {
-            Storage::disk('public')->delete("asset/majalah/cover/{$majalah->cover}");
+        // Hapus cover lama
+        $oldCoverPath = public_path("asset/majalah/cover/{$majalah->cover}");
+        if ($majalah->cover && file_exists($oldCoverPath)) {
+            unlink($oldCoverPath);
         }
 
-        $data['cover'] = $request->file('cover')->storeAs(
-            'asset/majalah/cover',
-            $request->file('cover')->getClientOriginalName(),
-            'public'
-        );
-        $data['cover'] = basename($data['cover']);
+        $newCover = $request->file('cover');
+        $newCoverName = time() . '_' . Str::slug(pathinfo($newCover->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $newCover->getClientOriginalExtension();
+        $newCover->move(public_path('asset/majalah/cover'), $newCoverName);
+        $data['cover'] = $newCoverName;
     }
 
-    // Hapus file PDF lama jika ada dan upload file PDF baru
+    // Ganti PDF jika ada
     if ($request->hasFile('file_pdf')) {
-        if ($majalah->file_pdf && Storage::disk('public')->exists("asset/majalah/pdf/{$majalah->file_pdf}")) {
-            Storage::disk('public')->delete("asset/majalah/pdf/{$majalah->file_pdf}");
+        $oldPdfPath = public_path("asset/majalah/pdf/{$majalah->file_pdf}");
+        if ($majalah->file_pdf && file_exists($oldPdfPath)) {
+            unlink($oldPdfPath);
         }
 
-        $data['file_pdf'] = $request->file('file_pdf')->storeAs(
-            'asset/majalah/pdf',
-            $request->file('file_pdf')->getClientOriginalName(),
-            'public'
-        );
-        $data['file_pdf'] = basename($data['file_pdf']);
+        $newPdf = $request->file('file_pdf');
+        $newPdfName = time() . '_' . Str::slug(pathinfo($newPdf->getClientOriginalName(), PATHINFO_FILENAME)) . '.' . $newPdf->getClientOriginalExtension();
+        $newPdf->move(public_path('asset/majalah/pdf'), $newPdfName);
+        $data['file_pdf'] = $newPdfName;
     }
 
     $majalah->update($data);

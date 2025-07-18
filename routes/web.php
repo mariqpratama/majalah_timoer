@@ -35,12 +35,25 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
-Route::middleware('admin.session')->group(function() {
-    Route::get('/admin', [AdminController::class, 'dashboard']);
-    Route::post('/admin/majalah', [AdminController::class, 'storeMajalah']);
-    Route::get('/admin/majalah/{id}/edit', [AdminController::class, 'editMajalah']);
-    Route::put('/admin/majalah/{id}', [AdminController::class, 'updateMajalah']);
-    Route::delete('/admin/majalah/{id}', [AdminController::class, 'destroyMajalah']);
-    Route::post('/admin/carousel', [AdminController::class, 'storeCarousel']);
-    Route::delete('/admin/carousel/{id}', [AdminController::class, 'destroyCarousel']);
+// Route::middleware('admin.session')->group(function() {
+//     Route::get('/admin', [AdminController::class, 'dashboard']);
+//     Route::post('/admin/majalah', [AdminController::class, 'storeMajalah']);
+//     Route::get('/admin/majalah/{id}/edit', [AdminController::class, 'editMajalah']);
+//     Route::put('/admin/majalah/{id}', [AdminController::class, 'updateMajalah']);
+//     Route::delete('/admin/majalah/{id}', [AdminController::class, 'destroyMajalah']);
+//     Route::post('/admin/carousel', [AdminController::class, 'storeCarousel']);
+//     Route::delete('/admin/carousel/{id}', [AdminController::class, 'destroyCarousel']);
+// });
+
+
+Route::middleware(['admin.session'])->group(function () {
+    // Dashboard
+    Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+    // CRUD Majalah
+    Route::get('/admin/majalah/create', [AdminController::class, 'createMajalah'])->name('admin.majalah.create');
+    Route::post('/admin/majalah', [AdminController::class, 'storeMajalah'])->name('admin.majalah.store');
+    Route::get('/admin/majalah/{id}/edit', [AdminController::class, 'editMajalah'])->name('admin.majalah.edit');
+    Route::put('/admin/majalah/{id}', [AdminController::class, 'updateMajalah'])->name('admin.majalah.update');
+    Route::delete('/admin/majalah/{id}', [AdminController::class, 'destroyMajalah'])->name('admin.majalah.destroy');
 });

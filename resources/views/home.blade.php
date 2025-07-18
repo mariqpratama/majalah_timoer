@@ -40,9 +40,8 @@
                         <select name="perPage" id="perPage"
                             class="block w-full appearance-none border border-gray-300 rounded-md py-1.5 pl-3 pr-7 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                             onchange="this.form.submit()">
-                            <option value="4" {{ request('perPage', 8) == 4 ? 'selected' : '' }}>4</option>
-                            <option value="8" {{ request('perPage', 8) == 8 ? 'selected' : '' }}>8</option>
-                            <option value="12" {{ request('perPage', 8) == 12 ? 'selected' : '' }}>12</option>
+                            <option value="6" {{ request('perPage', 6) == 6 ? 'selected' : '' }}>6</option>
+                            <option value="12" {{ request('perPage', 6) == 12 ? 'selected' : '' }}>12</option>
                             <option value="all" {{ request('perPage') == 'all' ? 'selected' : '' }}>Lihat Semua
                             </option>
                         </select>
