@@ -69,12 +69,6 @@
                                     src="{{ asset(config('paths.majalah_cover') . '/' . $majalah->cover) }}"
                                     alt="Cover" />
                             </a>
-                            {{-- Tombol --}}
-                            {{-- <div class="flex-1 flex flex-col justify-end px-4 pb-4 sm:px-5 sm:pb-5 mt-2">
-                                <a href="{{ route('majalah.detail', $majalah->id) }}"
-                                    class="block w-full text-center px-4 py-2 text-base font-semibold text-white bg-blue-700 rounded-md hover:bg-blue-800 transition-all duration-200 shadow hover:shadow-lg">Baca
-                                    Selengkapnya</a>
-                            </div> --}}
                         </div>
                     </article>
                 @endforeach

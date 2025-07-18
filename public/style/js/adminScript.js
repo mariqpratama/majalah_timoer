@@ -21,7 +21,12 @@ function closeModal(id) {
 
 function editMajalah(id) {
     fetch(`/admin/majalah/${id}/edit`)
-        .then((res) => res.json())
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error("Gagal mengambil data majalah.");
+            }
+            return res.json();
+        })
         .then((data) => {
             document.getElementById(
                 "editMajalahForm"
@@ -35,6 +40,10 @@ function editMajalah(id) {
                 </div>
             `;
             openModal("modalEditMajalah");
+        })
+        .catch((err) => {
+            alert(err.message);
+            console.error(err);
         });
 }
 
