@@ -53,16 +53,21 @@
 
             {{-- Majalah Grid --}}
             <div id="majalah-grid"
-                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10 max-w-7xl mx-auto mt-4">
+                class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-4 gap-y-6 max-w-7xl mx-auto mt-4">
                 @foreach ($majalahs as $majalah)
-                    <article class="flex flex-col items-stretch justify-between max-w-sm mx-auto">
+                    <article class="flex flex-col items-stretch justify-between">
                         <div
-                            class="w-full bg-white border border-gray-200 rounded-2xl shadow-md dark:bg-gray-800 dark:border-gray-700 flex flex-col h-full overflow-hidden transition-transform hover:scale-[1.025] duration-200">
+                            class="w-full bg-gray-800 border border-gray-700 rounded-2xl shadow-md flex flex-col h-full overflow-hidden transition-transform hover:scale-[1.025] duration-200">
+
                             {{-- Judul Majalah --}}
-                            <div class="px-4 pt-4 pb-2 sm:px-5 sm:pt-5 sm:pb-3 text-center">
+                            <div class="px-3 pt-3 pb-2 text-center">
                                 <span
-                                    class="block text-lg sm:text-xl font-bold text-blue-800 dark:text-blue-200 leading-tight line-clamp-2">{{ $majalah->judul }}</span>
+                                    class="block text-sm sm:text-base font-semibold text-white leading-snug text-ellipsis overflow-hidden"
+                                    style="display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">
+                                    {{ $majalah->judul }}
+                                </span>
                             </div>
+
                             {{-- Gambar Cover --}}
                             <a href="{{ route('majalah.detail', $majalah->id) }}" class="block">
                                 <img class="w-full aspect-[3/4] object-cover rounded-xl mx-auto transition-all duration-200 hover:shadow-lg"
@@ -73,6 +78,8 @@
                     </article>
                 @endforeach
             </div>
+
+
 
             {{-- Pagination --}}
             <div class="mt-8 flex flex-col items-center gap-2">
