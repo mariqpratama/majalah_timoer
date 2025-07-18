@@ -57,3 +57,8 @@ Route::middleware(['admin.session'])->group(function () {
     Route::put('/admin/majalah/{id}', [AdminController::class, 'updateMajalah'])->name('admin.majalah.update');
     Route::delete('/admin/majalah/{id}', [AdminController::class, 'destroyMajalah'])->name('admin.majalah.destroy');
 });
+
+Route::get('/test-session', function () {
+    session(['cek' => 'berhasil']);
+    return session('cek', 'gagal');
+});
